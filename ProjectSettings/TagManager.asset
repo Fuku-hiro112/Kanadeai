@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Stairs
+  - Door
+  - Clickable
+  - YesNoButton
+  - DialogSystem
+  - Wall
+  - Enemy
+  - GameManager
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - EventPoint
+  - Water
+  - UI
+  - ItemPoint
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: BackGround
+    uniqueID: 2126688723
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Objects
+    uniqueID: 4166707627
+    locked: 0
+  - name: Character
+    uniqueID: 1510872675
+    locked: 0
+  - name: Front
+    uniqueID: 4228484365
+    locked: 0
