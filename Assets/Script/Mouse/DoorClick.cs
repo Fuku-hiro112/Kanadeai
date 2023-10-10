@@ -8,14 +8,15 @@ public class DoorClick : MonoBehaviour, IClickAction
     [SerializeField] private ItemData _keyItem;
     [SerializeField] private bool _doorLock;
     [Inject] private IPlayerAreaMove _iplayerAreaMove;
-    private DialogSystem _dialogSystem;
-    private IPlayerController _iplayerController;
+
+    private UIManager _uiManager;
     private CancellationToken _token;
+    private IPlayerController _iplayerController;
 
     void Start()
     {
         _token = this.GetCancellationTokenOnDestroy();
-        _dialogSystem      = GameObject.FindGameObjectWithTag("DialogSystem").GetComponent<DialogSystem>();
+        _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         _iplayerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
     public void ClickAction()
@@ -49,15 +50,14 @@ public class DoorClick : MonoBehaviour, IClickAction
     /// <returns></returns>
     private async UniTask ClickLockDoor()
     {
-        await _dialogSystem.TypeDialogAsync("鍵がかかっている。", isClick: true);
+        await _uiManager.DialogSystem.TypeDialogAsync("鍵がかかっている。", isClick: true);
         if (HasKey(_keyItem))
         {
-            await _dialogSystem.TypeDialogAsync($"{_keyItem.name}を使いますか？");
+            await _uiManager.DialogSystem.TypeDialogAsync($"{_keyItem.name}を使いますか？");
             // ボタン処理
-            ButtonSystem btnSystem = ButtonSystem.s_Instance;
-            btnSystem.ButtonEnable(true);                       // 表示・非表示
-            btnSystem.ButtonAddListener("YesButton", ClickYes); // Yesボタン処理割り当て
-            btnSystem.ButtonAddListener("NoButton" , ClickNo);  // No ボタン処理割り当て
+            _uiManager.ButtonSystem.ButtonEnable(true);                       // 表示・非表示
+            _uiManager.ButtonSystem.ButtonAddListener("YesButton", ClickYes); // Yesボタン処理割り当て
+            _uiManager.ButtonSystem.ButtonAddListener("NoButton" , ClickNo);  // No ボタン処理割り当て
         }
         else
         {
@@ -76,10 +76,10 @@ public class DoorClick : MonoBehaviour, IClickAction
     /// <returns>UniTaskVoid</returns>
     private async UniTaskVoid ClickYes()
     {
-        ButtonSystem.s_Instance.ButtonEnable(false);
+        _uiManager.ButtonSystem.ButtonEnable(false);
         Inventory.s_Instance.Remove(_keyItem);
         _doorLock = false;
-        await _dialogSystem.TypeDialogAsync("ドアが空いた。", isClick: true);
+        await _uiManager.DialogSystem.TypeDialogAsync("ドアが空いた。", isClick: true);
         await ClickDoor();
     }
     /// <summary>
@@ -88,7 +88,7 @@ public class DoorClick : MonoBehaviour, IClickAction
     /// <returns>UniTaskVoid</returns>
     private void ClickNo()
     {
-        ButtonSystem.s_Instance.ButtonEnable(false);
+        _uiManager.ButtonSystem.ButtonEnable(false);
         _iplayerController.MoveStart();
     }
 }

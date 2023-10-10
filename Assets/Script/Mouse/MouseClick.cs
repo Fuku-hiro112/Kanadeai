@@ -2,12 +2,9 @@ using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityEngine;
 
-// Decを使いオブジェクトの名前
+// MuseClick処理
 public class MouseClick : MonoBehaviour
 {
-    [SerializeField] private GameObject _player;
-    [SerializeField] private AreaMoveData _areaMoveData;
-
     public void HandolUpdate()
     {
         ClickMouse();

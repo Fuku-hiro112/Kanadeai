@@ -8,16 +8,18 @@ public class MusicBoxClick : MonoBehaviour, IClickAction
     [SerializeField] private GameObject _enemy;
     [SerializeField] private AudioClip _trueSound;
     [SerializeField] private AudioClip _falseSound;
-    private IPlayerController _iplayerController;
-    private IEnemyController _ienemyController;
-    private DialogSystem _dialogSystem;
+
+    private UIManager _uiManager;
     private AudioSource _audioSource;
+    private IEnemyController _ienemyController;
+    private IPlayerController _iplayerController;
     
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-        _dialogSystem = GameObject.FindGameObjectWithTag("DialogSystem").GetComponent<DialogSystem>();
+        _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         _iplayerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        _ienemyController = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyController>();
     }
     public void ClickAction()
     {
@@ -30,18 +32,17 @@ public class MusicBoxClick : MonoBehaviour, IClickAction
     private async UniTaskVoid ClickMusicBox()
     {
         _iplayerController.BusyStart();
-        await _dialogSystem.TypeDialogAsync("オルゴールがある。",true);
+        await _uiManager.DialogSystem.TypeDialogAsync("オルゴールがある。",true);
         
         // 調べる？　はい、いいえ処理
         if (HasScrew(_goldScrew) || HasScrew(_silverScrew))
         {
-            await _dialogSystem.TypeDialogAsync("調べる？");
+            await _uiManager.DialogSystem.TypeDialogAsync("調べる？");
             // ボタンの表示、非表示
-            ButtonSystem buttonSystem = ButtonSystem.s_Instance;
-            buttonSystem.ButtonEnable(true);
+            _uiManager.ButtonSystem.ButtonEnable(true);
             // ボタンへ処理の割り当て　
-            buttonSystem.ButtonAddListener("YesButton", ClickCheckYes);
-            buttonSystem.ButtonAddListener("NoButton", ClickNo);
+            _uiManager.ButtonSystem.ButtonAddListener("YesButton", ClickCheckYes);
+            _uiManager.ButtonSystem.ButtonAddListener("NoButton", ClickNo);
         }
         else // ネジを持っていない場合
         {
@@ -59,8 +60,8 @@ public class MusicBoxClick : MonoBehaviour, IClickAction
     /// </summary>
     private void ClickNo()
     {
-        ButtonSystem.s_Instance.ButtonEnable(false);
-        _dialogSystem.TextInvisible();
+        _uiManager.ButtonSystem.ButtonEnable(false);
+        _uiManager.DialogSystem.TextInvisible();
         _iplayerController.MoveStart();
     }
     /// <summary>
@@ -68,28 +69,27 @@ public class MusicBoxClick : MonoBehaviour, IClickAction
     /// </summary>
     private async UniTaskVoid ClickCheckYes()
     {
-        ButtonSystem buttonSystem = ButtonSystem.s_Instance;
-        buttonSystem.ButtonEnable(false);
+        _uiManager.ButtonSystem.ButtonEnable(false);
         _enemy.SetActive(true);// 敵出現
 
         // ネジを使いますか？の　はい、いいえ処理割り当て
         if (HasScrew(_goldScrew))
         {
-            await _dialogSystem.TypeDialogAsync($"{_goldScrew.name}を使いますか？");
+            await _uiManager.DialogSystem.TypeDialogAsync($"{_goldScrew.name}を使いますか？");
             // ボタンの表示、非表示
-            buttonSystem.ButtonEnable(true);
+            _uiManager.ButtonSystem.ButtonEnable(true);
             // ボタンへ処理の割り当て
-            buttonSystem.ButtonAddListener("YesButton", ClickTrueYes);
-            buttonSystem.ButtonAddListener("NoButton", ClickNo);
+            _uiManager.ButtonSystem.ButtonAddListener("YesButton", ClickTrueYes);
+            _uiManager.ButtonSystem.ButtonAddListener("NoButton", ClickNo);
         }
         else// 銀のネジの場合
         {
-            await _dialogSystem.TypeDialogAsync($"{_silverScrew.name}を使いますか？");
+            await _uiManager.DialogSystem.TypeDialogAsync($"{_silverScrew.name}を使いますか？");
             // ボタンの表示、非表示
-            buttonSystem.ButtonEnable(true);
+            _uiManager.ButtonSystem.ButtonEnable(true);
             // ボタンへ処理の割り当て
-            buttonSystem.ButtonAddListener("YesButton", ClickFalseYes);
-            buttonSystem.ButtonAddListener("NoButton", ClickNo);
+            _uiManager.ButtonSystem.ButtonAddListener("YesButton", ClickFalseYes);
+            _uiManager.ButtonSystem.ButtonAddListener("NoButton", ClickNo);
         }
     }
     /// <summary>
@@ -97,9 +97,8 @@ public class MusicBoxClick : MonoBehaviour, IClickAction
     /// </summary>
     void ClickTrueYes() 
     {
-        _dialogSystem.TextInvisible();
-        ButtonSystem.s_Instance.ButtonEnable(false);
-        _ienemyController = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyController>();
+        _uiManager.DialogSystem.TextInvisible();
+        _uiManager.ButtonSystem.ButtonEnable(false);
         //オルゴールの音が出る
         _audioSource.PlayOneShot(_trueSound);
         //幽霊のステート変化
@@ -110,8 +109,8 @@ public class MusicBoxClick : MonoBehaviour, IClickAction
     /// </summary>
     void ClickFalseYes()
     {
-        _dialogSystem.TextInvisible();
-        ButtonSystem.s_Instance.ButtonEnable(false);
+        _uiManager.DialogSystem.TextInvisible();
+        _uiManager.ButtonSystem.ButtonEnable(false);
         //オルゴールの音が出る
         _audioSource.PlayOneShot(_falseSound);
         _iplayerController.MoveStart();

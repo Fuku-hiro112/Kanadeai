@@ -5,19 +5,19 @@ using UnityEngine.UI;
 
 public class PlayerAreaMove : MonoBehaviour,IPlayerAreaMove
 {
-    private Fade _fade;
     [SerializeField] private int _frame = 1;
     [SerializeField] private int _alfaValue = 1;
     [SerializeField] private int _fadeInWaitTime = 1000;
     [SerializeField] private Transform _player;
     [SerializeField] private Image _panel;
     
+    private UIManager _uiManager;
     private IAreaMoveData _iareaMoveData;
     private IPlayerController _iplayerController;
 
     private void Start()
     {
-        _fade = new Fade();
+        _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         _iareaMoveData = GetComponentInChildren<AreaMoveData>();// 子オブジェクトから検索
         _iplayerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
@@ -30,7 +30,7 @@ public class PlayerAreaMove : MonoBehaviour,IPlayerAreaMove
         _iplayerController.BusyStart();// Playerが動けないように
         Vector3 position = _iareaMoveData.Floor[obj];
 
-        await _fade.FadeIn(_alfaValue, _frame, _panel, token);
+        await _uiManager.Fade.FadeIn(_alfaValue, _frame, _panel, token);
         _player.position = position;//指定座標へ移動
 
         // 向きの反転
@@ -40,7 +40,7 @@ public class PlayerAreaMove : MonoBehaviour,IPlayerAreaMove
 
         await UniTask.Delay(_fadeInWaitTime);
         AudioManager.Instance.StopSE();
-        await _fade.FadeOut(_alfaValue, _frame, _panel, token);
+        await _uiManager.Fade.FadeOut(_alfaValue, _frame, _panel, token);
         _iplayerController.MoveStart();// Playerが動けるように
     }
     /// <summary>
@@ -52,7 +52,7 @@ public class PlayerAreaMove : MonoBehaviour,IPlayerAreaMove
         AudioManager.Instance.PlaySE(SESoundData.SE.OpenDoor);
         Vector3 position = _iareaMoveData.Room[obj];
 
-        await _fade.FadeIn(_alfaValue, _frame, _panel, token);
+        await _uiManager.Fade.FadeIn(_alfaValue, _frame, _panel, token);
         _player.position = position;//指定座標へ移動
 
         //左を向く　部屋のドアを右側に付けるようにしているため
@@ -61,6 +61,6 @@ public class PlayerAreaMove : MonoBehaviour,IPlayerAreaMove
 
         await UniTask.Delay(_fadeInWaitTime);
         AudioManager.Instance.PlaySE(SESoundData.SE.CloseDoor);
-        await _fade.FadeOut(_alfaValue, _frame, _panel, token);
+        await _uiManager.Fade.FadeOut(_alfaValue, _frame, _panel, token);
     }
 }

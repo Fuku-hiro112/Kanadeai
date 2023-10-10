@@ -8,9 +8,9 @@ using UnityEngine.UI;
 public class ButtonSystem : MonoBehaviour
 {
     [SerializeField] public List<Button> _listButton;
-    public static ButtonSystem s_Instance;
+    //public static ButtonSystem s_Instance;
     private CancellationToken _token;
-
+    /*
     private void Awake()
     {
         if (s_Instance == null)
@@ -25,6 +25,7 @@ public class ButtonSystem : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    */
     private void Start()
     {
         ButtonEnable(false);

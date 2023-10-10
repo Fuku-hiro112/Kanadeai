@@ -11,15 +11,16 @@ public class TitleController : MonoBehaviour
     [SerializeField] private Image _fadeImage;
     [SerializeField] private Image _titleLogo;
     [SerializeField] private Image _titleTap;
-    private bool _tapFlashing = false;
     [SerializeField] private float _flashingSpeed = 1f;
     [SerializeField] private int _alpha = 10;
     [SerializeField] private int _frame = 2;
     [SerializeField] private float _titleLogoWaitTime;
     [SerializeField] private float _titleTapWaitTime;
     [SerializeField] private VideoPlayer _titleVideo;
+    
+    private bool _tapFlashing = false;
+    private Fade _fade;
     private CancellationToken _token;
-    Fade _fade;
 
     void Start()
     {

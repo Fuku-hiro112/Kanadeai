@@ -22,11 +22,13 @@ public class DialCheck : MonoBehaviour
     [NonSerialized] public bool _guolL = false;
 
     [SerializeField] private GameObject _gimmikObj;
-    private DialogSystem _dialogSystem;
+
+    private UIManager _uiManager;
+    
     void Start()
     {
         _iplayerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        _dialogSystem = GameObject.FindGameObjectWithTag("DialogSystem").GetComponent<DialogSystem>();
+        _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
     }
     //正解のほう
     public async UniTaskVoid CollectLOVE()
@@ -35,7 +37,7 @@ public class DialCheck : MonoBehaviour
         {
             Inventory.s_Instance.Add(_goldItem);
             AudioManager.Instance.PlaySE(SESoundData.SE.GetItem);
-            await _dialogSystem.TypeDialogAsync("金のネジを手に入れた",true);
+            await _uiManager.DialogSystem.TypeDialogAsync("金のネジを手に入れた",true);
             _iplayerController.MoveStart();
             Destroy(_gimmikObj);
             _canvas.gameObject.SetActive(false);
@@ -48,7 +50,7 @@ public class DialCheck : MonoBehaviour
         if (_guolG && _guolU && _guolO && _guolL)
         {
             Inventory.s_Instance.Add(_silverItem);
-            await _dialogSystem.TypeDialogAsync("銀のネジを手に入れた", true);
+            await _uiManager.DialogSystem.TypeDialogAsync("銀のネジを手に入れた", true);
             _iplayerController.MoveStart();
             Destroy(_gimmikObj);
             _canvas.gameObject.SetActive(false);
