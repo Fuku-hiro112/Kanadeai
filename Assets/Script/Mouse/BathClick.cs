@@ -10,7 +10,7 @@ public class BathClick : MonoBehaviour, IClickAction
 
     void Start()
     {
-        _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+        _uiManager         = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         _iplayerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 

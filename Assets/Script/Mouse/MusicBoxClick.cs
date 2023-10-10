@@ -19,7 +19,6 @@ public class MusicBoxClick : MonoBehaviour, IClickAction
         _audioSource = GetComponent<AudioSource>();
         _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         _iplayerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        _ienemyController = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyController>();
     }
     public void ClickAction()
     {
@@ -99,9 +98,11 @@ public class MusicBoxClick : MonoBehaviour, IClickAction
     {
         _uiManager.DialogSystem.TextInvisible();
         _uiManager.ButtonSystem.ButtonEnable(false);
-        //オルゴールの音が出る
+        // 初めはsetActive(false)なので、GetComponent出来ないためここでGetしている
+        _ienemyController = _enemy.GetComponent<EnemyController>();
+        // オルゴールの音が出る
         _audioSource.PlayOneShot(_trueSound);
-        //幽霊のステート変化
+        // 幽霊のステート変化
         _ienemyController.StartReMove();
     }
     /// <summary>

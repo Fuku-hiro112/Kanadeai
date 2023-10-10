@@ -19,11 +19,12 @@ public class SnakeClick : MonoBehaviour,IClickAction
 
     void Start()
     {
-        _imageFade.gameObject.SetActive(false);
         _myCollider        = GetComponent<Collider2D>();
         _uiManager         = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         _iplayerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         _token = this.GetCancellationTokenOnDestroy();
+
+        _imageFade.gameObject.SetActive(false);
     }
 
     public void ClickAction()

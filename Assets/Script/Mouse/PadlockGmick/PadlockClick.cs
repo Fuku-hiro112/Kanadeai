@@ -10,7 +10,7 @@ public class PadlockClick : MonoBehaviour, IClickAction
     void Start()
     {
         _padlock.gameObject.SetActive(false);
-        _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+        _uiManager         = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         _iplayerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
     //オブジェクトをクリックしたらテキストがこの表示される

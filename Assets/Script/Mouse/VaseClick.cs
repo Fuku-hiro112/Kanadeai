@@ -16,7 +16,8 @@ public class VaseClick : MonoBehaviour, IClickAction
     void Start()
     {
         _iplayerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        _vaseRenderer = GetComponent<SpriteRenderer>();
+        _uiManager         = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+        _vaseRenderer      = GetComponent<SpriteRenderer>();
     }
 
     public void ClickAction()

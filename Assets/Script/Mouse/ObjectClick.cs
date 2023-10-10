@@ -10,8 +10,8 @@ public class ObjectClick : MonoBehaviour, IClickAction
 
     void Start()
     {
+        _uiManager         = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         _iplayerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
     }
 
     public void ClickAction()

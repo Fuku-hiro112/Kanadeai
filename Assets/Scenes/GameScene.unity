@@ -6580,7 +6580,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &936577259
 GameObject:
@@ -7781,7 +7781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f08015fa5ea6548b7959d96a54a0fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Padlock: {fileID: 1224928891}
+  _padlock: {fileID: 1224928891}
 --- !u!1 &1035564322
 GameObject:
   m_ObjectHideFlags: 0
@@ -10354,7 +10354,7 @@ GameObject:
   - component: {fileID: 1261705048}
   - component: {fileID: 1261705049}
   m_Layer: 0
-  m_Name: Global Light 2D (1)
+  m_Name: DebugGlobal Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13007,6 +13007,56 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &1549149946
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1549149948}
+  - component: {fileID: 1549149947}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: UIManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1549149947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549149946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 970017901e1e599448c04a3e299a7bb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonSystem: {fileID: 591084477}
+--- !u!224 &1549149948
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549149946}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1549562433
 GameObject:
   m_ObjectHideFlags: 0
@@ -15486,8 +15536,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 415c0d3850405bd489639802e6405999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 198930425}
-  _areaMoveData: {fileID: 1450597516}
 --- !u!4 &1843800527
 Transform:
   m_ObjectHideFlags: 0
@@ -17054,7 +17102,6 @@ MonoBehaviour:
   _gameState: 0
   _playerController: {fileID: 198930431}
   _enemyController: {fileID: 1171819301}
-  _dialogSystem: {fileID: 755625135}
   _gameOverCanvas: {fileID: 0}
   _gameCanvas: {fileID: 330212018}
   _synopsisCanvas: {fileID: 865398196}
