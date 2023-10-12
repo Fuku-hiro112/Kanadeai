@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
+// “çƒNƒŠƒbƒNˆ—
 public class PotClick : MonoBehaviour, IClickAction
 {
     [SerializeField] private ItemData _frog1;

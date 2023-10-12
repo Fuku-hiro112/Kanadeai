@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// ゲームオーバー時の操作
 public class GameOverController : MonoBehaviour
 {
     //コメント書け

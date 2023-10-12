@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// 寝室のドアの操作　（幽霊が覗いており、近づくと閉まる）
 public class BedRoaomDoorAction : MonoBehaviour
 {
     [SerializeField] private Transform _playerPosition;

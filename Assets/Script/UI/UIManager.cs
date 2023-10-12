@@ -1,11 +1,14 @@
 using UnityEngine;
 
-// UI系クラスの窓口枠クラス　依存関係を単純化する
+// UI操作系クラスの窓口枠クラス　依存関係を単純化する
 public class UIManager : MonoBehaviour
 {
-    [SerializeField]private ButtonSystem _buttonSystem;
+    // ボタンシステムは「はい・いいえ」に割り振るクラス
+    [SerializeField]private ButtonSystem _buttonSystem;// 他にもBotton操作系を作った場合区別したいためSerialezeで取ってくるようにしている
+    // 文字を表示させるクラス
     private DialogSystem _dialogSystem;
-    private Fade _fade;
+    // フェードさせるクラス
+    private Fade _fade;　　　　　　　　
 
     public DialogSystem DialogSystem { get => _dialogSystem;}
     public ButtonSystem ButtonSystem { get => _buttonSystem;}

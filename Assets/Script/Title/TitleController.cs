@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
+// ƒ^ƒCƒgƒ‹‰æ–Ê‚Ì‘€ì
 public class TitleController : MonoBehaviour
 {
     [SerializeField] private Image _fadeImage;

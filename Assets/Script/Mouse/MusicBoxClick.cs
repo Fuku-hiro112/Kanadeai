@@ -1,13 +1,17 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
+// オルゴールクリック処理　長いのでクラスやメソッドを分けよう
 public class MusicBoxClick : MonoBehaviour, IClickAction
 {
+    // オルゴールを鳴らす為のネジ2種類
     [SerializeField] private ItemData _goldScrew;
     [SerializeField] private ItemData _silverScrew;
-    [SerializeField] private GameObject _enemy;
+    // サウンド2種
     [SerializeField] private AudioClip _trueSound;
     [SerializeField] private AudioClip _falseSound;
+
+    [SerializeField] private GameObject _enemy;
 
     private UIManager _uiManager;
     private AudioSource _audioSource;
@@ -31,7 +35,7 @@ public class MusicBoxClick : MonoBehaviour, IClickAction
     private async UniTaskVoid ClickMusicBox()
     {
         _iplayerController.BusyStart();
-        await _uiManager.DialogSystem.TypeDialogAsync("オルゴールがある。",true);
+        await _uiManager.DialogSystem.TypeDialogAsync("音のならないオルゴールがある。",true);
         
         // 調べる？　はい、いいえ処理
         if (HasScrew(_goldScrew) || HasScrew(_silverScrew))

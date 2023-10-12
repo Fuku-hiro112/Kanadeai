@@ -8,7 +8,7 @@ public enum EnemyState
     ReMove,
     Moving
 }
-
+// “G‚ÌŠÇ—
 public class EnemyController : MonoBehaviour ,IEnemyController
 {
     [SerializeField] private byte alpha = 10;
