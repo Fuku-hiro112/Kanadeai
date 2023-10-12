@@ -82,6 +82,14 @@ public class Fade
             }
         }
     }
+    /// <summary>
+    /// フェードインのオーバーロード　敵の場合のみマテリアルでしか動かなかった　　自分でも少し修正しましたが、友達に直してもらったので内部処理は違います
+    /// </summary>
+    /// <param name="alpha">透明度を下げる値</param>
+    /// <param name="ms">何ミリ秒で</param>
+    /// <param name="spriteRenderer">このスプライトを</param>
+    /// <param name="token">キャンセル用のトークン</param>
+    /// <returns></returns>
     public async UniTask FadeIn(byte alpha, int ms, SpriteRenderer spriteRenderer, CancellationToken token)//Material
     {
         byte a = _maxClearValue;
