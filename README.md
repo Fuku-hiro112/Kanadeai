@@ -14,14 +14,27 @@ PC
 ## 言語  
 C#  
   
-## 使用ツール    ※確認中  
+## 使用ツール    
 **・開発環境**   
 VisualStudio2022, Unity2022.2.6f1,  
 **・ライブラリ**  
-UniTask,Zenject  
+UniTask, DOTween, Zenject  
   
 ## [紹介動画](https://drive.google.com/drive/folders/1AcwpgEDliHenzU-d1eYSm1XN4SiEZIyk)   
 ２分ほどの動画で紹介動画を作成しました。  
   
 ## コーディング範囲  
-
+PlayerAreaMove.cs  
+UIManager.cs  
+DoorClick.cs  
+ExitClick.cs  
+ItemClick.cs  
+MouseClick.cs  
+MusicBoxClick.cs  
+ObjectClick.cs  
+インターフェース全て  
+Assets/Script/UI　ファイル全て  
+  
+## [クラス図](https://drive.google.com/drive/folders/1jZlRsVeTlWX7V5AJS-kh8xS7-BP63Vtn)  
+ファイル数が多くなっているためクラス図を添付しています。  
+メモ書き程度なので少々雑な図になっています。  
