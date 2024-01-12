@@ -24,16 +24,25 @@ UniTask, DOTween, Zenject
 ２分ほどの動画で紹介動画を作成しました。  
   
 ## コーディング範囲  
-PlayerAreaMove.cs  
-UIManager.cs  
+Assets/Script ファイルの  
+GameManager.cs  
+AudioManager.cs  
+  
+Assets/Script/Mouseファイルの  
 DoorClick.cs  
 ExitClick.cs  
 ItemClick.cs  
 MouseClick.cs  
 MusicBoxClick.cs  
 ObjectClick.cs  
-インターフェース全て  
+  
+Assets/Script/Playr/PlayerController.cs  
+Assets/Script/Enemy/EnemyController.cs  
+  
+Assets/Script/Interfaceファイル全て  
+Assets/Script/Installerファイル全て  
 Assets/Script/UI　ファイル全て  
+Assets/Script/AreaMoveファイル全て   
   
 ## [クラス図](https://drive.google.com/drive/folders/1jZlRsVeTlWX7V5AJS-kh8xS7-BP63Vtn)  
 ファイル数が多くなっているためクラス図を添付しています。  
