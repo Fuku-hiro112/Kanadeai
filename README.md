@@ -1,4 +1,6 @@
+https://github.com/Fuku-hiro112/Kanadeai/assets/134264092/17799c0a-60ef-4637-a7cd-f39e13cf1edc
 # 【概要】  
+![image](https://github.com/Fuku-hiro112/Kanadeai/assets/134264092/198ec2c2-92cc-418a-aae1-b22eb6fb3883)  
 ## [ゲーム概要](https://drive.google.com/drive/folders/15wsUJrFbPkfpdOk34nMoEsn4MKNgJcPf)  
 リンク先の企画書にて概要説明を行っています.  
   
