@@ -17,10 +17,8 @@ public class GameManager : MonoBehaviour, IGameManager
     [SerializeField] private GameState _gameState;
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private EnemyController _enemyController;
-    [SerializeField] private DialogSystem _dialogSystem;
     [SerializeField] private GameObject _gameOverCanvas;
     [SerializeField] private GameObject _gameCanvas;
-
 
     [SerializeField] private GameObject _synopsisCanvas;
     [SerializeField] private GameObject _fadePanel;
@@ -29,16 +27,18 @@ public class GameManager : MonoBehaviour, IGameManager
     [SerializeField] private int _frame;
     [SerializeField] private Type[] _types;
     private CancellationToken _token;
-    private Fade _fade;
+    private UIManager _uiManager;
+
     // シングルトンに　ゲーム中1つしか存在できないようにするため　シーン遷移でDestroyしないため
     void Start()
     {
-        _token = this.GetCancellationTokenOnDestroy();
-        _fade = new Fade();
-        AudioManager.Instance.StopBGM(true);
+        Application.targetFrameRate = 60;
         _gameState = GameState.Busy;
-        _dialogSystem = GameObject.FindGameObjectWithTag("DialogSystem").GetComponent<DialogSystem>();
+        _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+        _token     = this.GetCancellationTokenOnDestroy();
+
         StartOP().Forget();
+        AudioManager.Instance.StopBGM(true);
     }
 
     void Update()
@@ -71,13 +71,13 @@ public class GameManager : MonoBehaviour, IGameManager
     async UniTaskVoid StartOP()
     {
         _synopsisCanvas.SetActive(true);
-        await _fade.FadeOut(_alpha, _frame, _fadePanel.GetComponent<Image>(), _token);
+        await _uiManager.Fade.FadeOut(_alpha, _frame, _fadePanel.GetComponent<Image>(), _token);
         await UniTask.Delay(2000);
         //テキストパネルをa170までフェードイン
-        await _fade.FadeIn(_alpha,_frame,170,_textPanel.GetComponent<Image>(),_token);
+        await _uiManager.Fade.FadeIn(_alpha,_frame,170,_textPanel.GetComponent<Image>(),_token);
         foreach (Type type in _types)
         {
-            await _dialogSystem.TypeDialogAsync(type.Text,type.Letter, true);
+            await _uiManager.DialogSystem.TypeDialogAsync(type.Text,type.Letter, true);
         }
         _synopsisCanvas.SetActive(false);
         _gameState = GameState.Play;

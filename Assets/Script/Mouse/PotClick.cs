@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
+// 鍋クリック処理
 public class PotClick : MonoBehaviour, IClickAction
 {
     [SerializeField] private ItemData _frog1;
@@ -8,15 +9,16 @@ public class PotClick : MonoBehaviour, IClickAction
     [SerializeField] private ItemData _frog3;
     [SerializeField] private ItemData _frogEgg;
     [SerializeField] private ItemData _soup;
+
     private string _yesButton = "YesButton";
     private string _noButton = "NoButton";
+    private UIManager _uiManager;
     private IPlayerController _iplayerController;
-    private DialogSystem _dialogSystem;
 
     private void Start()
     {
         _iplayerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        _dialogSystem = GameObject.FindGameObjectWithTag("DialogSystem").GetComponent<DialogSystem>();
+        _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
     }
 
     public void ClickAction()
@@ -28,28 +30,28 @@ public class PotClick : MonoBehaviour, IClickAction
     private async UniTaskVoid ClickPot()
     {
         _iplayerController.BusyStart();
-        await _dialogSystem.TypeDialogAsync("塩コショウで味付けされたスープがある", true);
-        await _dialogSystem.TypeDialogAsync("調理する？");
+        await _uiManager.DialogSystem.TypeDialogAsync("塩コショウで味付けされたスープがある", true);
+        await _uiManager.DialogSystem.TypeDialogAsync("調理する？");
         //ボタンを呼び出す
-        ButtonSystem.s_Instance.ButtonEnable(true);
-        ButtonSystem.s_Instance.ButtonAddListener(_yesButton, YesButton);
-        ButtonSystem.s_Instance.ButtonAddListener(_noButton, NoButton);
+        _uiManager.ButtonSystem.ButtonEnable(true);
+        _uiManager.ButtonSystem.ButtonAddListener(_yesButton, YesButton);
+        _uiManager.ButtonSystem.ButtonAddListener(_noButton, NoButton);
     }
 
     //「はい」を押されたとき
     private async UniTaskVoid YesButton()
     {
-        ButtonSystem.s_Instance.ButtonEnable(false);
-        _dialogSystem.TextInvisible();
+        _uiManager.ButtonSystem.ButtonEnable(false);
+        _uiManager.DialogSystem.TextInvisible();
         if (HasFrogs())
         {
             RemoveSoupMaterial();
             Inventory.s_Instance.Add(_soup);
-            await _dialogSystem.TypeDialogAsync($"{_soup.name}を手に入れた", true);
+            await _uiManager.DialogSystem.TypeDialogAsync($"{_soup.name}を手に入れた", true);
         }
         else
         {
-            await _dialogSystem.TypeDialogAsync("具材が足りない", true);
+            await _uiManager.DialogSystem.TypeDialogAsync("具材が足りない", true);
         }
         _iplayerController.MoveStart();
     }
@@ -57,8 +59,8 @@ public class PotClick : MonoBehaviour, IClickAction
     //「いいえ」を押されたとき
     private void NoButton()
     {
-        ButtonSystem.s_Instance.ButtonEnable(false);
-        _dialogSystem.TextInvisible();
+        _uiManager.ButtonSystem.ButtonEnable(false);
+        _uiManager.DialogSystem.TextInvisible();
         _iplayerController.MoveStart();
     }
 

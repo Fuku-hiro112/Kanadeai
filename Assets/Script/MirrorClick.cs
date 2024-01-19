@@ -5,7 +5,7 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MirrorGimmick : MonoBehaviour, IClickAction
+public class MirrorClick : MonoBehaviour, IClickAction
 {
     [SerializeField] private RawImage _mirrorVideo;
     [SerializeField] private Image _mirrorImage;
@@ -15,16 +15,16 @@ public class MirrorGimmick : MonoBehaviour, IClickAction
     private CancellationToken _token;
     private float _randomNumber;
     private IPlayerController _iplayerController;
-    private DialogSystem _dialogSystem;
+    private UIManager _uiManager;
 
     void Start()
     {
-        Application.targetFrameRate = 60;
-        _dialogSystem = GameObject.FindGameObjectWithTag("DialogSystem").GetComponent<DialogSystem>();
+        _uiManager         = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         _iplayerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        _token             = this.GetCancellationTokenOnDestroy();
+
         _mirrorImage.gameObject.SetActive(false);
         _mirrorVideo.gameObject.SetActive(false);
-        _token = this.GetCancellationTokenOnDestroy();
     }
 
     public void ClickAction()
@@ -42,7 +42,7 @@ public class MirrorGimmick : MonoBehaviour, IClickAction
             _mirrorVideo.gameObject.SetActive(true);
             await UniTask.Delay(TimeSpan.FromSeconds(_mirrorVideoTime), cancellationToken: _token);
             _mirrorVideo.gameObject.SetActive(false);
-            await _dialogSystem.TypeDialogAsync("。。。。。。", true);
+            await _uiManager.DialogSystem.TypeDialogAsync("。。。。。。", true);
         }
         //外れた時、画像を出す
         else

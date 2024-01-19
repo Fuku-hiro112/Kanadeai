@@ -1,4 +1,5 @@
 public interface IClickAction
 {
-    public void ClickAction();
+    // å≥ÅXpublickÇæÇ¡ÇΩÅ@Ç»Ç∫ÅH
+    void ClickAction();
 }

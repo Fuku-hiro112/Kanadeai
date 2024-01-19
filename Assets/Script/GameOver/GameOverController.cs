@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// ゲームオーバー時の操作
 public class GameOverController : MonoBehaviour
 {
     //コメント書け
@@ -17,13 +18,15 @@ public class GameOverController : MonoBehaviour
     [SerializeField] private int _frame = 2;
     [SerializeField] private float _imageWaitTime = 3f;//画像が変わり始めるまでの時間
     [SerializeField] private float _textWaitTime = 3f;//テキストが出てくるまでの時間
+    
+    private Fade _fade;
     private CancellationToken _token;
-    Fade _fade;
+
     void Start()
     {
         Application.targetFrameRate = 60;
         _returnTitleText.gameObject.SetActive(false);
-        _fade = new Fade();
+        _fade  = new Fade();
         _token = this.GetCancellationTokenOnDestroy();
         GameOverUI().Forget();
     }

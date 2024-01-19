@@ -9,22 +9,22 @@ public class SnakeClick : MonoBehaviour,IClickAction
     [SerializeField] private ItemData _soup;
     [SerializeField] private int _alpha = 10;
     [SerializeField] private int _frame = 2;
+
     private string _yesButton = "YesButton";
     private string _noButton = "NoButton";
-    private Fade _fade;
     private Collider2D _myCollider;
-    private DialogSystem _dialogSystem;
-    private IPlayerController _iplayerController;
+    private UIManager _uiManager;
     private CancellationToken _token;
+    private IPlayerController _iplayerController;
 
     void Start()
     {
-        _fade = new Fade();
-        _imageFade.gameObject.SetActive(false);
         _myCollider        = GetComponent<Collider2D>();
-        _dialogSystem      = GameObject.FindGameObjectWithTag("DialogSystem").GetComponent<DialogSystem>();
+        _uiManager         = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         _iplayerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         _token = this.GetCancellationTokenOnDestroy();
+
+        _imageFade.gameObject.SetActive(false);
     }
 
     public void ClickAction()
@@ -36,13 +36,13 @@ public class SnakeClick : MonoBehaviour,IClickAction
     //蛇をクリックしたときの処理
     private async UniTaskVoid DisplayText()
     {
-        await _dialogSystem.TypeDialogAsync("蛇が邪魔で進めない", true);
+        await _uiManager.DialogSystem.TypeDialogAsync("蛇が邪魔で進めない", true);
         if (HasSoup(_soup))
         {
-            await _dialogSystem.TypeDialogAsync("カエルのスープを渡す？");
-            ButtonSystem.s_Instance.ButtonEnable(true);
-            ButtonSystem.s_Instance.ButtonAddListener(_yesButton, YesButton);
-            ButtonSystem.s_Instance.ButtonAddListener(_noButton, NoButton);
+            await _uiManager.DialogSystem.TypeDialogAsync("カエルのスープを渡す？");
+            _uiManager.ButtonSystem.ButtonEnable(true);
+            _uiManager.ButtonSystem.ButtonAddListener(_yesButton, YesButton);
+            _uiManager.ButtonSystem.ButtonAddListener(_noButton, NoButton);
         }
         else
         {
@@ -56,14 +56,14 @@ public class SnakeClick : MonoBehaviour,IClickAction
     //「はい」を押されたとき
     private async UniTaskVoid YesButton()
     {
-        ButtonSystem.s_Instance.ButtonEnable(false);
+        _uiManager.ButtonSystem.ButtonEnable(false);
         Inventory.s_Instance.Remove(_soup);
         _imageFade.gameObject.SetActive(true);
-        _dialogSystem.TextInvisible();
-        await _fade.FadeIn(_alpha, _frame, _imageFade, _token);
+        _uiManager.DialogSystem.TextInvisible();
+        await _uiManager.Fade.FadeIn(_alpha, _frame, _imageFade, _token);
         gameObject.SetActive(false);
-        await _fade.FadeOut(_alpha, _frame, _imageFade, _token);
-        await _dialogSystem.TypeDialogAsync("蛇がいなくなった", true);
+        await _uiManager.Fade.FadeOut(_alpha, _frame, _imageFade, _token);
+        await _uiManager.DialogSystem.TypeDialogAsync("蛇がいなくなった", true);
         _imageFade.gameObject.SetActive(false);
         _iplayerController.MoveStart();
     }
@@ -71,8 +71,8 @@ public class SnakeClick : MonoBehaviour,IClickAction
     //「いいえ」を押されたとき
     private void NoButton()
     {
-        ButtonSystem.s_Instance.ButtonEnable(false);
-        _dialogSystem.TextInvisible();
+        _uiManager.ButtonSystem.ButtonEnable(false);
+        _uiManager.DialogSystem.TextInvisible();
         _myCollider.enabled = true;
         _iplayerController.MoveStart();
     }
