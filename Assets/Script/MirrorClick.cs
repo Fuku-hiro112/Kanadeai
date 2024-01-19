@@ -5,7 +5,7 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MirrorGimmick : MonoBehaviour, IClickAction
+public class MirrorClick : MonoBehaviour, IClickAction
 {
     [SerializeField] private RawImage _mirrorVideo;
     [SerializeField] private Image _mirrorImage;
