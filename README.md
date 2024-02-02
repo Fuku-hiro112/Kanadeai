@@ -31,16 +31,16 @@ UniTask, DOTween, Zenject
   
 ## コーディング範囲  
 Assets/Script ファイルの  
-GameManager.cs  
-AudioManager.cs  
+ GameManager.cs  
+ AudioManager.cs  
   
 Assets/Script/Mouseファイルの  
-DoorClick.cs  
-ExitClick.cs  
-ItemClick.cs  
-MouseClick.cs  
-MusicBoxClick.cs  
-ObjectClick.cs  
+ DoorClick.cs  
+ ExitClick.cs  
+ ItemClick.cs  
+ MouseClick.cs  
+ MusicBoxClick.cs  
+ ObjectClick.cs  
   
 Assets/Script/Playr/PlayerController.cs  
 Assets/Script/Enemy/EnemyController.cs  
@@ -52,6 +52,6 @@ Assets/Script/AreaMoveファイル全て
   
 ## [クラス図](https://drive.google.com/drive/folders/1jZlRsVeTlWX7V5AJS-kh8xS7-BP63Vtn)  
 `https://drive.google.com/drive/folders/1jZlRsVeTlWX7V5AJS-kh8xS7-BP63Vtn`  
-![kanadeai drawio](https://github.com/Fuku-hiro112/Kanadeai/assets/134264092/c896dcbe-e767-466c-b1a6-32ac5d771d9b)  
+![kanadeai drawio](https://github.com/Fuku-hiro112/Kanadeai/assets/134264092/9eb18496-1b10-419b-8104-8219c2130360)  
 ファイル数が多くなっているためクラス図を添付しています。  
 メモ書き程度なので少々雑な図になっています。  
