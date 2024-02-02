@@ -3,7 +3,8 @@ https://github.com/Fuku-hiro112/Kanadeai/assets/134264092/17799c0a-60ef-4637-a7c
 ![image](https://github.com/Fuku-hiro112/Kanadeai/assets/134264092/198ec2c2-92cc-418a-aae1-b22eb6fb3883)  
 ## [ゲーム概要](https://drive.google.com/drive/folders/15wsUJrFbPkfpdOk34nMoEsn4MKNgJcPf)    
   
-`https://drive.google.com/drive/folders/15wsUJrFbPkfpdOk34nMoEsn4MKNgJcPf`リンク先の企画書にて概要説明を行っています.  
+`https://drive.google.com/drive/folders/15wsUJrFbPkfpdOk34nMoEsn4MKNgJcPf`  
+リンク先の企画書にて概要説明を行っています.  
   
 ## 製作期間   
 ２０２３年　９月５日～９月２９日  
